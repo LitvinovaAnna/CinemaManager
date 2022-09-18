@@ -17,6 +17,8 @@ public class CinemaManagerTest {
     String movie8 = "8";
     String movie9 = "9";
     String movie10 = "10";
+    String movie11 = "11";
+
 
     @Test
     public void shouldAddMovies() {
@@ -83,4 +85,77 @@ public class CinemaManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void zero() {
+        CinemaManager manager = new CinemaManager();
+        String[] expected = {};
+        String[] actual = manager.findAll();
+
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void lessThanLimit() { //В менеджере меньше фильмов, чем лимит
+        CinemaManager manager = new CinemaManager();
+        manager.add(movie1);
+        manager.add(movie2);
+        manager.add(movie3);
+        manager.add(movie4);
+        manager.add(movie5);
+        manager.add(movie6);
+        manager.add(movie7);
+        manager.add(movie8);
+        manager.add(movie9);
+
+        String[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9};
+        String[] actual = manager.findAll();
+
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void moreThanLimit() { //В менеджере больше фильмов, чем лимит
+        CinemaManager manager = new CinemaManager();
+        manager.add(movie1);
+        manager.add(movie2);
+        manager.add(movie3);
+        manager.add(movie4);
+        manager.add(movie5);
+        manager.add(movie6);
+        manager.add(movie7);
+        manager.add(movie8);
+        manager.add(movie9);
+        manager.add(movie10);
+        manager.add(movie11);
+
+        String[] expected = {movie11, movie10, movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2};
+        String[] actual = manager.findLast();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void likeLimit() { // кол-во фильмов равно лимиту
+        CinemaManager manager = new CinemaManager();
+        manager.add(movie1);
+        manager.add(movie2);
+        manager.add(movie3);
+        manager.add(movie4);
+        manager.add(movie5);
+        manager.add(movie6);
+        manager.add(movie7);
+        manager.add(movie8);
+        manager.add(movie9);
+        manager.add(movie10);
+
+        String[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10};
+        String[] actual = manager.findAll();
+
+        assertArrayEquals(expected, actual);
+    }
+
+
 }
